@@ -132,7 +132,7 @@ namespace UI.Desktop
            
             if(txtApellido.Text == "" ||  txtClave.Text.Length < 8 || txtNombre.Text =="" || txtUsuario.Text =="" || txtEmail.Text =="" || txtClave.Text =="" || txtConfirmarClave.Text != txtClave.Text)
             {
-                Notificar("Datos invalido","Revisar los datos del formulario",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                this.Notificar("Datos invalido","Revisar los datos del formulario",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return false;
             }
             else
@@ -142,14 +142,7 @@ namespace UI.Desktop
             
             
         }
-        public  void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            MessageBox.Show(mensaje, titulo, botones, icono);
-        }
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            this.Notificar(this.Text, mensaje, botones, icono);
-        }
+       
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {

@@ -10,24 +10,11 @@ namespace Data.Database
 {
     public class UsuarioAdapter:Adapter
     {
-        #region DatosEnMemoria
-        // Esta región solo se usa en esta etapa donde los datos se mantienen en memoria.
-        // Al modificar este proyecto para que acceda a la base de datos esta será eliminada
-        private static List<Usuario> _Usuarios;
-
-        private static List<Usuario> Usuarios
-        {
-            get
-            {
-                
-                return _Usuarios;
-            }
-        }
-        #endregion
+       
 
         public List<Usuario> GetAll()
         {
-            //return new List<Usuario>(Usuarios);
+            
             List<Usuario> usuarios = new List<Usuario>();
             this.OpenConnection();
             SqlCommand cmdUsuario = new SqlCommand("Select * from usuarios", SqlConn);
@@ -198,6 +185,43 @@ namespace Data.Database
             }
             usuario.State = BusinessEntity.States.Unmodified; 
 
+        }
+        public Usuario LogIn(string username , string password)
+        {
+            Usuario usr = null  ;
+            try
+            {
+                this.OpenConnection();
+                SqlCommand cmdUsuario = new SqlCommand("select usr.id_usuario , usr.nombre_usuario , per.tipo_persona from usuarios usr inner join personas per on usr.id_persona = per.id_persona where usr.nombre_usuario = @nombre_usuario AND usr.clave = @clave", SqlConn);
+                cmdUsuario.Parameters.Add("@clave", SqlDbType.VarChar, 50).Value = password;
+                cmdUsuario.Parameters.Add("@nombre_usuario", SqlDbType.VarChar,50).Value = username;
+                SqlDataReader drUsuario = cmdUsuario.ExecuteReader();
+                if (drUsuario.Read())
+                {
+                    usr = new Usuario();
+                    usr.ID = (int)drUsuario["id_usuario"];
+                    usr.NombreUsuario = (string)drUsuario["nombre_usuario"];
+                    //usr.Clave = (string)drUsuario["clave"];
+                    //usr.Habilitado = (bool)drUsuario["habilitado"];
+                    //usr.Nombre = (string)drUsuario["nombre"];
+                    //usr.Apellido = (string)drUsuario["apellido"];
+                    //usr.Email = (string)drUsuario["email"];
+                    usr.TipoPersona = (int)drUsuario["tipo_persona"];
+
+                }
+                drUsuario.Close();
+            }
+            catch (Exception ex)
+            {
+                Exception ExcepcionManejada = new Exception("Error al recuperar los datos del usuario", ex);
+
+                throw ExcepcionManejada;
+            }
+            finally
+            {
+                this.CloseConnection();
+            }
+            return usr;
         }
     }
 }

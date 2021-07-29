@@ -10,7 +10,7 @@ namespace Business.Entities
     {
         private string desc_comision;
 
-        public string DescComisin
+        public string DescComision
         {
             get { return desc_comision; }
             set { desc_comision = value; }

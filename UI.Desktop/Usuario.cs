@@ -20,8 +20,8 @@ namespace UI.Desktop
         }
         public void Listar()
         {
-            UsuarioLogic bl = new UsuarioLogic();
-            this.dgvUsuarios.DataSource = bl.GetAll(); 
+           
+            this.dgvUsuarios.DataSource = UsuarioLogic.GetInstance().GetAll(); 
         }
 
         private void Form1_Load(object sender, EventArgs e)

@@ -119,14 +119,6 @@ namespace UI.Desktop
             }
         
         }
-        public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            MessageBox.Show(mensaje, titulo, botones, icono);
-        }
-        public void Notificar(string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
-        {
-            this.Notificar(this.Text, mensaje, botones, icono);
-        }
 
         private void btnSaveEsp_Click(object sender, EventArgs e)
         {
@@ -136,6 +128,11 @@ namespace UI.Desktop
                 this.GuardarCambios();
                 this.Close();
             }
+        }
+
+        private void tbId_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

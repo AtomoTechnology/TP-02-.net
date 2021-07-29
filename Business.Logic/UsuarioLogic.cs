@@ -12,6 +12,20 @@ namespace Business.Logic
     public class UsuarioLogic : BusinessLogic
     {
         private UsuarioAdapter _usuarioData;
+        private static UsuarioLogic singleton ;
+  
+       
+        public static UsuarioLogic GetInstance ()
+        {
+   
+            if(singleton == null)
+            {
+                singleton = new UsuarioLogic();
+            }
+
+            return singleton;
+           
+        }
 
         public UsuarioAdapter Usuario
         {
@@ -38,6 +52,10 @@ namespace Business.Logic
         public void Save(Usuario usuario)
         {
             Usuario.Save(usuario);
+        }
+        public Usuario LogIn(string username , string password)
+        {
+            return  Usuario.LogIn(username, password);
         }
        
     }

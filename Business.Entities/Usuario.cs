@@ -14,6 +14,17 @@ namespace Business.Entities
         private string _apellido;
         private string _email;
         private bool _habilitado;
+        //private int _idPersona;
+        private int _tipopersona;
+
+        public int TipoPersona
+        {
+            get { return _tipopersona; }
+            set { _tipopersona = value; }
+        }
+
+
+
 
         public string NombreUsuario
         {
